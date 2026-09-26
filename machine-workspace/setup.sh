@@ -9,7 +9,7 @@ set -euo pipefail
 
 SKILL_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 WS="${WORKSPACE_DIR:-$HOME/workspace}"
-VERSION=1
+VERSION=2
 started=$(date +%s.%N)
 
 # sqlite3 CLI: install the Python-backed shim when the real one is missing, and refresh a shim an
@@ -55,6 +55,9 @@ while IFS=$'\t' read -r stage when author message tag; do
     continue
   fi
   cp -a "$hist/$stage/." "$repo/"
+  # Re-hash every file: the copies keep the skill checkout's mtimes, so a same-size change
+  # (1.3.0 -> 1.4.0) would otherwise pass git's stat check and never be committed.
+  git -C "$repo" read-tree --empty
   git -C "$repo" add -A
   GIT_AUTHOR_DATE="$when" GIT_COMMITTER_DATE="$when" \
     git -C "$repo" -c core.hooksPath=/dev/null commit -q --author="$author" -m "$message"

@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # Lays out ~/workspace, Ledgerly's shared ops box: code with git history, the billing database,
-# AWS/IAM/helpdesk exports, logs, runbooks and notes. Offline and idempotent: a second run is a no-op.
+# AWS/IAM/helpdesk exports, logs, runbooks and notes. Offline and idempotent: a second run leaves
+# ~/workspace alone (it only refreshes the sqlite3 shim, if this script installed one).
 #
 # Usage: setup.sh            build ~/workspace if it isn't there yet
 #        setup.sh --reset    delete ~/workspace (and every change made in it) and rebuild it
@@ -10,6 +11,13 @@ SKILL_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 WS="${WORKSPACE_DIR:-$HOME/workspace}"
 VERSION=1
 started=$(date +%s.%N)
+
+# sqlite3 CLI: install the Python-backed shim when the real one is missing, and refresh a shim an
+# earlier run installed (a long-lived sandbox keeps /usr/local/bin across skill updates).
+current_sqlite="$(command -v sqlite3 || true)"
+if [ -w /usr/local/bin ] && { [ -z "$current_sqlite" ] || grep -qs 'python sqlite3 module shim' "$current_sqlite"; }; then
+  install -m 0755 "$SKILL_DIR/sqlite3_shim.py" /usr/local/bin/sqlite3
+fi
 
 if [ "${1:-}" = "--reset" ]; then
   rm -rf "$WS"
@@ -65,15 +73,11 @@ for day in 2026-07-03 2026-07-10 2026-07-17 2026-07-24 2026-07-31 2026-08-07 202
   touch -d "$day 23:59:00" "$arch/app-$day.log.gz" "$arch/nginx-$day.log.gz"
 done
 
-# sqlite3 CLI: install the Python-backed shim when the real one is missing.
+# No sqlite3 on PATH and /usr/local/bin not writable: leave the shim in the workspace instead.
 if ! command -v sqlite3 > /dev/null 2>&1; then
-  if [ -w /usr/local/bin ]; then
-    install -m 0755 "$SKILL_DIR/sqlite3_shim.py" /usr/local/bin/sqlite3
-  else
-    mkdir -p "$tmp/bin"
-    install -m 0755 "$SKILL_DIR/sqlite3_shim.py" "$tmp/bin/sqlite3"
-    echo "note: sqlite3 shim installed at $WS/bin/sqlite3 (not on PATH)"
-  fi
+  mkdir -p "$tmp/bin"
+  install -m 0755 "$SKILL_DIR/sqlite3_shim.py" "$tmp/bin/sqlite3"
+  echo "note: sqlite3 shim installed at $WS/bin/sqlite3 (not on PATH)"
 fi
 
 echo "$VERSION" > "$tmp/.workspace-version"

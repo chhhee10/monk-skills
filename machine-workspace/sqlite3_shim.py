@@ -2,17 +2,21 @@
 """A small stand-in for the sqlite3 CLI, backed by Python's sqlite3 module.
 
 setup.sh installs it as `sqlite3` only when the real CLI is missing. Supports the common cases:
-  sqlite3 [-header] [-column|-box|-table|-csv|-json|-list|-line] [-separator S] [-bail] DB ["SQL or .command" ...]
+  sqlite3 [-readonly] [-header] [-column|-box|-table|-markdown|-csv|-json|-list|-line] [-separator S] [-bail] DB ["SQL or .command" ...]
   sqlite3 DB < script.sql
-Dot commands: .tables, .schema [table], .indexes [table], .headers on|off, .mode MODE, .quit
+Dot commands: .tables, .schema [table], .indexes [table], .headers on|off, .mode MODE, .read FILE, .quit
 """
 
 import csv
 import json
 import sqlite3
 import sys
+from urllib.parse import quote
 
-MODES = {"-column": "column", "-box": "column", "-table": "column", "-csv": "csv", "-json": "json", "-list": "list", "-line": "line"}
+MODES = {
+    "-column": "column", "-box": "column", "-table": "column", "-markdown": "column",
+    "-csv": "csv", "-json": "json", "-list": "list", "-line": "line",
+}
 
 
 class Shell:
@@ -55,6 +59,13 @@ class Shell:
             self.header = bool(args) and args[0] == "on"
         elif cmd == ".mode" and args:
             self.mode = {"box": "column", "table": "column", "markdown": "column"}.get(args[0], args[0])
+        elif cmd == ".read" and args:
+            path = line.split(None, 1)[1].strip().strip("'\"")
+            try:
+                with open(path, encoding="utf-8") as f:
+                    self.run(f.read())
+            except OSError as e:
+                self.error(f"cannot open \"{path}\": {e.strerror}")
         elif cmd == ".tables":
             names = [r[0] for r in self.db.execute("SELECT name FROM sqlite_master WHERE type IN ('table','view') AND name NOT LIKE 'sqlite_%' ORDER BY 1")]
             print("  ".join(names))
@@ -97,11 +108,13 @@ class Shell:
 
 
 def main(argv: list[str]) -> int:
-    opts = {"header": False, "mode": "list", "sep": "|", "bail": False}
+    opts = {"header": False, "mode": "list", "sep": "|", "bail": False, "readonly": False}
     rest = []
     it = iter(argv)
     for a in it:
-        if a in ("-header", "-headers"):
+        if a == "-readonly":
+            opts["readonly"] = True
+        elif a in ("-header", "-headers"):
             opts["header"] = True
         elif a == "-noheader":
             opts["header"] = False
@@ -112,15 +125,27 @@ def main(argv: list[str]) -> int:
             opts["sep"] = next(it, "|")
         elif a == "-bail":
             opts["bail"] = True
-        elif a in ("-readonly", "-batch"):
+        elif a == "-batch":
             continue
         elif a in ("-version", "--version"):
             print(f"{sqlite3.sqlite_version} (python sqlite3 module shim)")
             return 0
+        elif a.startswith("-") and not rest:
+            # Like the real CLI: an unknown option must not be taken for the database path.
+            print(f"sqlite3: Error: unknown option: {a} (this is a small shim; see sqlite3_shim.py)", file=sys.stderr)
+            return 1
         else:
             rest.append(a)
     path = rest[0] if rest else ":memory:"
-    shell = Shell(sqlite3.connect(path, isolation_level=None))
+    try:
+        if opts["readonly"] and path != ":memory:":
+            db = sqlite3.connect(f"file:{quote(path)}?mode=ro", uri=True, isolation_level=None)
+        else:
+            db = sqlite3.connect(path, isolation_level=None)
+    except sqlite3.Error as e:
+        print(f'Error: unable to open database "{path}": {e}', file=sys.stderr)
+        return 1
+    shell = Shell(db)
     shell.mode, shell.header, shell.sep, shell.bail = opts["mode"], opts["header"], opts["sep"], opts["bail"]
     if len(rest) > 1:
         for cmd in rest[1:]:

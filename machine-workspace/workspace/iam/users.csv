@@ -1,0 +1,17 @@
+username,full_name,email,team,type,status,created_on,last_login,mfa,roles
+ananya.rao,Ananya Rao,ananya.rao@ledgerly.example,engineering,human,active,2023-02-01,2026-09-25,yes,admin;engineer
+karthik.r,Karthik Raman,karthik.r@ledgerly.example,platform,human,active,2023-06-19,2026-09-25,yes,admin;engineer
+arjun.k,Arjun Krishnan,arjun.k@ledgerly.example,engineering,human,active,2024-06-10,2026-09-25,yes,engineer;db-migrator
+priya.nair,Priya Nair,priya.nair@ledgerly.example,engineering,human,active,2025-01-06,2026-09-24,yes,engineer;release-manager
+sneha.iyer,Sneha Iyer,sneha.iyer@ledgerly.example,engineering,human,active,2025-11-03,2026-09-25,no,engineer
+rohan.mehta,Rohan Mehta,rohan.mehta@ledgerly.example,data,human,active,2024-02-12,2026-06-12,yes,engineer;superadmin-legacy
+vikram.p,Vikram Prasad,vikram.p@contractors.ledgerly.example,engineering,contractor,active,2025-12-01,2026-03-30,no,db-migrator
+kabir.singh,Kabir Singh,kabir.singh@ledgerly.example,support,human,active,2024-04-01,2026-09-25,yes,support
+farhan.khan,Farhan Khan,farhan.khan@ledgerly.example,support,human,active,2025-08-18,2026-09-25,yes,support
+divya.menon,Divya Menon,divya.menon@ledgerly.example,finance,human,active,2023-08-21,2026-09-25,yes,finance-viewer;billing-admin
+sameer.das,Sameer Das,sameer.das@ledgerly.example,finance,human,active,2026-02-02,2026-09-10,yes,finance-viewer
+meera.joshi,Meera Joshi,meera.joshi@ledgerly.example,sales,human,active,2024-09-09,2026-09-25,yes,sales-viewer
+neha.gupta,Neha Gupta,neha.gupta@ledgerly.example,marketing,human,active,2024-01-15,2026-05-02,yes,marketing
+aditi.bose,Aditi Bose,aditi.bose@ledgerly.example,design,human,disabled,2024-05-06,2026-01-15,yes,viewer
+ops-bot-2023,Ops automation (2023 data-centre move),ops-bot@ledgerly.example,platform,service,active,2023-05-10,2025-12-02,n/a,superadmin-legacy
+ci-deployer,GitHub Actions deployer,ci@ledgerly.example,platform,service,active,2026-05-18,2026-09-25,n/a,deployer

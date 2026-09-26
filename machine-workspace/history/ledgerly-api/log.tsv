@@ -1,0 +1,9 @@
+# stage	date (IST)	author	message	tag
+01-initial	2026-06-30T11:04:12+05:30	Priya Nair <priya.nair@ledgerly.example>	Initial import of ledgerly-api from the monolith	v1.3.0
+02-totals	2026-07-21T16:22:40+05:30	Arjun Krishnan <arjun.k@ledgerly.example>	feat: invoice totals with GST rounded per line	
+03-terms	2026-08-04T12:47:05+05:30	Arjun Krishnan <arjun.k@ledgerly.example>	feat: payment terms, reminder selection and the create-invoice handler	
+04-release-1.4.0	2026-08-12T18:10:33+05:30	Priya Nair <priya.nair@ledgerly.example>	chore: release v1.4.0	v1.4.0
+05-inr-grouping	2026-08-28T10:31:58+05:30	Sneha Iyer <sneha.iyer@ledgerly.example>	fix: format_inr uses Indian digit grouping (1,00,000)	
+06-credit-notes	2026-09-09T15:02:17+05:30	Arjun Krishnan <arjun.k@ledgerly.example>	feat: credit notes (negative line quantities) in invoice totals	
+07-docs	2026-09-18T11:45:09+05:30	Priya Nair <priya.nair@ledgerly.example>	docs: document the create-invoice payload, errors and release steps	
+08-reminders-today	2026-09-23T17:26:44+05:30	Sneha Iyer <sneha.iyer@ledgerly.example>	fix: payment reminders include invoices due today	

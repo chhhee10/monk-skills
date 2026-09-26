@@ -1,0 +1,15 @@
+"""Money is stored as integer paise; these helpers convert and format it."""
+
+from decimal import ROUND_HALF_UP, Decimal
+
+
+def to_paise(amount: str | int | Decimal) -> int:
+    """'1499.50' -> 149950. Rounds half-up to the nearest paisa."""
+    return int((Decimal(str(amount)) * 100).quantize(Decimal("1"), rounding=ROUND_HALF_UP))
+
+
+def format_inr(paise: int) -> str:
+    """149950 -> '₹1,499.50'."""
+    sign = "-" if paise < 0 else ""
+    rupees, rest = divmod(abs(paise), 100)
+    return f"{sign}₹{rupees:,}.{rest:02d}"

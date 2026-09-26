@@ -1,0 +1,136 @@
+{
+  "exported_at": "2026-09-25T18:00:00+05:30",
+  "queue": "ledgerly-helpdesk",
+  "tickets": [
+    {
+      "id": "LED-398",
+      "created_at": "2026-09-12T11:20:04+05:30",
+      "requester": {
+        "customer_id": 1017,
+        "name": "accounts@ (customer 1017)"
+      },
+      "subject": "Export invoices to Tally",
+      "body": "We reconcile in Tally Prime. Can Ledgerly export invoices as Tally XML so our accountant doesn't retype them every month?",
+      "status": "open",
+      "priority": "low",
+      "type": "feature_request",
+      "assignee": "kabir.singh"
+    },
+    {
+      "id": "LED-403",
+      "created_at": "2026-09-16T09:48:51+05:30",
+      "requester": {
+        "customer_id": 1058,
+        "name": "customer 1058"
+      },
+      "subject": "Password reset email not arriving",
+      "body": "Tried three times this morning, no email.",
+      "status": "resolved",
+      "priority": "normal",
+      "type": "question",
+      "assignee": "farhan.khan",
+      "resolution": "Found in the customer's spam folder (their mail filter flags our reset links). Asked them to allowlist no-reply@ledgerly.example."
+    },
+    {
+      "id": "LED-405",
+      "created_at": "2026-08-26T15:12:30+05:30",
+      "requester": {
+        "customer_id": 1025,
+        "name": "customer 1025"
+      },
+      "subject": "Invoice PDF shows ₹100,000.00 instead of ₹1,00,000.00",
+      "body": "Our CA says the invoice amount formatting is wrong for Indian invoices. Lakhs should be grouped as 1,00,000.",
+      "status": "waiting_for_release",
+      "priority": "normal",
+      "type": "bug",
+      "assignee": "sneha.iyer",
+      "fixed_in_commit": "fix: format_inr uses Indian digit grouping (1,00,000)"
+    },
+    {
+      "id": "LED-407",
+      "created_at": "2026-09-19T12:03:17+05:30",
+      "requester": {
+        "customer_id": 1033,
+        "name": "customer 1033"
+      },
+      "subject": "GST on our invoice is 1 paisa off from Tally",
+      "body": "Our invoice has two SMS pack lines of ₹1.25 each. Ledgerly shows GST ₹0.46, Tally computes ₹0.45 on the total. Which is right?",
+      "status": "pending_customer",
+      "priority": "low",
+      "type": "question",
+      "assignee": "kabir.singh",
+      "last_reply": "Ledgerly rounds GST per line, half-up, as the GST portal does. Tally is set to round on the invoice total. Both are allowed; per-line is what we file."
+    },
+    {
+      "id": "LED-409",
+      "created_at": "2026-09-21T10:15:42+05:30",
+      "requester": {
+        "customer_id": 1071,
+        "name": "customer 1071"
+      },
+      "subject": "Payment reminder not sent for invoice due today",
+      "body": "Our client's invoice was due yesterday and they say they never got a reminder email. The ones due in 2-3 days do get them.",
+      "status": "waiting_for_release",
+      "priority": "normal",
+      "type": "bug",
+      "assignee": "sneha.iyer",
+      "fixed_in_commit": "fix: payment reminders include invoices due today"
+    },
+    {
+      "id": "LED-410",
+      "created_at": "2026-09-25T14:21:40+05:30",
+      "requester": {
+        "customer_id": 1025,
+        "name": "customer 1025"
+      },
+      "subject": "App timing out for several minutes after 2 PM",
+      "body": "From about 2:02 PM the invoice list and the dashboard kept spinning and then showed 'Gateway timeout'. Creating an invoice also failed once. Fine again by 2:10.",
+      "status": "open",
+      "priority": "high",
+      "type": "incident",
+      "assignee": "karthik.r"
+    },
+    {
+      "id": "LED-411",
+      "created_at": "2026-09-25T14:35:09+05:30",
+      "requester": {
+        "customer_id": 1088,
+        "name": "customer 1088"
+      },
+      "subject": "Dashboard didn't load around 2:05 PM",
+      "body": "Got a 504 on the dashboard twice, works now.",
+      "status": "open",
+      "priority": "normal",
+      "type": "incident",
+      "assignee": null
+    },
+    {
+      "id": "LED-412",
+      "created_at": "2026-09-25T16:55:12+05:30",
+      "requester": {
+        "user": "divya.menon",
+        "team": "finance"
+      },
+      "subject": "Billing console: creating an invoice fails (500) for customers on Net 45",
+      "body": "We moved Sharma Traders (1042) and Nair Textiles (1063) to Net 45 on Monday as per their new contracts. Since then every invoice I create for them fails with 'Something went wrong (500)'. Customers on Net 15 are fine. I tried at 4:41 and 4:43 PM for Sharma Traders (seat upgrade, 12 to 20 seats) and at 4:52 PM for Nair Textiles. Need this working before month-end close on the 30th.",
+      "status": "open",
+      "priority": "urgent",
+      "type": "bug",
+      "assignee": null
+    },
+    {
+      "id": "LED-413",
+      "created_at": "2026-09-25T17:40:26+05:30",
+      "requester": {
+        "customer_id": 1049,
+        "name": "customer 1049"
+      },
+      "subject": "How do I add a second GSTIN for our Kolkata branch?",
+      "body": "We opened a branch in Kolkata and have a separate GSTIN there.",
+      "status": "open",
+      "priority": "low",
+      "type": "question",
+      "assignee": "farhan.khan"
+    }
+  ]
+}

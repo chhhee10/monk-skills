@@ -1,0 +1,244 @@
+{
+  "exported_at": "2026-09-25T06:00:00+05:30",
+  "source": "Ledgerly admin console > Access > Export",
+  "notes": "last_used is the last time a member exercised the role's permissions.",
+  "roles": [
+    {
+      "name": "admin",
+      "description": "Full access to every system.",
+      "permissions": [
+        "*"
+      ],
+      "created_on": "2023-02-01",
+      "members": [
+        {
+          "user": "ananya.rao",
+          "last_used": "2026-09-25"
+        },
+        {
+          "user": "karthik.r",
+          "last_used": "2026-09-24"
+        }
+      ],
+      "last_used": "2026-09-25"
+    },
+    {
+      "name": "superadmin-legacy",
+      "description": "Temporary full access for the 2023 data-centre move. Remove after the migration.",
+      "permissions": [
+        "*",
+        "iam:*",
+        "billing:refund",
+        "db:prod:*"
+      ],
+      "created_on": "2023-05-10",
+      "members": [
+        {
+          "user": "rohan.mehta",
+          "last_used": "2025-12-02"
+        },
+        {
+          "user": "ops-bot-2023",
+          "last_used": "2025-11-28"
+        }
+      ],
+      "last_used": "2025-12-02"
+    },
+    {
+      "name": "engineer",
+      "description": "Code, staging deploys, staging DB, logs.",
+      "permissions": [
+        "repo:*",
+        "deploy:staging",
+        "db:staging:*",
+        "logs:read"
+      ],
+      "created_on": "2023-02-01",
+      "members": [
+        {
+          "user": "ananya.rao",
+          "last_used": "2026-09-25"
+        },
+        {
+          "user": "karthik.r",
+          "last_used": "2026-09-25"
+        },
+        {
+          "user": "arjun.k",
+          "last_used": "2026-09-25"
+        },
+        {
+          "user": "priya.nair",
+          "last_used": "2026-09-24"
+        },
+        {
+          "user": "sneha.iyer",
+          "last_used": "2026-09-25"
+        },
+        {
+          "user": "rohan.mehta",
+          "last_used": "2026-06-11"
+        }
+      ],
+      "last_used": "2026-09-25"
+    },
+    {
+      "name": "db-migrator",
+      "description": "Schema changes and writes on the prod database.",
+      "permissions": [
+        "db:prod:ddl",
+        "db:prod:write",
+        "db:prod:read"
+      ],
+      "created_on": "2024-06-10",
+      "members": [
+        {
+          "user": "arjun.k",
+          "last_used": "2026-09-12"
+        },
+        {
+          "user": "vikram.p",
+          "last_used": "2026-03-28"
+        }
+      ],
+      "last_used": "2026-09-12"
+    },
+    {
+      "name": "release-manager",
+      "description": "Tag releases and deploy to prod.",
+      "permissions": [
+        "repo:tag",
+        "deploy:prod"
+      ],
+      "created_on": "2025-01-06",
+      "members": [
+        {
+          "user": "priya.nair",
+          "last_used": "2026-08-12"
+        }
+      ],
+      "last_used": "2026-08-12"
+    },
+    {
+      "name": "deployer",
+      "description": "CI deploys.",
+      "permissions": [
+        "deploy:prod",
+        "deploy:staging"
+      ],
+      "created_on": "2026-05-18",
+      "members": [
+        {
+          "user": "ci-deployer",
+          "last_used": "2026-09-25"
+        }
+      ],
+      "last_used": "2026-09-25"
+    },
+    {
+      "name": "support",
+      "description": "Helpdesk, read customers and invoices.",
+      "permissions": [
+        "tickets:*",
+        "customers:read",
+        "invoices:read"
+      ],
+      "created_on": "2024-04-01",
+      "members": [
+        {
+          "user": "kabir.singh",
+          "last_used": "2026-09-25"
+        },
+        {
+          "user": "farhan.khan",
+          "last_used": "2026-09-25"
+        }
+      ],
+      "last_used": "2026-09-25"
+    },
+    {
+      "name": "billing-admin",
+      "description": "Create and change invoices, issue refunds.",
+      "permissions": [
+        "billing:*",
+        "invoices:write",
+        "billing:refund"
+      ],
+      "created_on": "2023-08-21",
+      "members": [
+        {
+          "user": "divya.menon",
+          "last_used": "2026-09-25"
+        }
+      ],
+      "last_used": "2026-09-25"
+    },
+    {
+      "name": "finance-viewer",
+      "description": "Read invoices and finance reports.",
+      "permissions": [
+        "invoices:read",
+        "reports:read"
+      ],
+      "created_on": "2023-08-21",
+      "members": [
+        {
+          "user": "divya.menon",
+          "last_used": "2026-09-23"
+        },
+        {
+          "user": "sameer.das",
+          "last_used": "2026-09-10"
+        }
+      ],
+      "last_used": "2026-09-23"
+    },
+    {
+      "name": "sales-viewer",
+      "description": "Read customers and reports.",
+      "permissions": [
+        "customers:read",
+        "reports:read"
+      ],
+      "created_on": "2024-09-09",
+      "members": [
+        {
+          "user": "meera.joshi",
+          "last_used": "2026-09-25"
+        }
+      ],
+      "last_used": "2026-09-25"
+    },
+    {
+      "name": "marketing",
+      "description": "Website CMS and email campaigns.",
+      "permissions": [
+        "cms:*",
+        "email:campaigns"
+      ],
+      "created_on": "2024-01-15",
+      "members": [
+        {
+          "user": "neha.gupta",
+          "last_used": "2026-05-02"
+        }
+      ],
+      "last_used": "2026-05-02"
+    },
+    {
+      "name": "viewer",
+      "description": "Read-only reports.",
+      "permissions": [
+        "reports:read"
+      ],
+      "created_on": "2024-05-06",
+      "members": [
+        {
+          "user": "aditi.bose",
+          "last_used": "2026-01-15"
+        }
+      ],
+      "last_used": "2026-01-15"
+    }
+  ]
+}

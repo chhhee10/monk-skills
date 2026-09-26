@@ -1,0 +1,6 @@
+[project]
+name = "ledgerly-api"
+version = "1.3.0"
+description = "Billing helpers behind Ledgerly's /v1 API"
+requires-python = ">=3.11"
+dependencies = []
